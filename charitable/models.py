@@ -6,7 +6,7 @@ from django.contrib.postgres.fields import RangeField
 # Create your models here.
 
 class Requests(models.Model):
-    fin_statements = models.FileField(upload_to='documents/%Y/%m/%d')
+    fin_statements = models.FileField(upload_to='documents')
     reports = models.FileField(upload_to='documents')
     amount_range = RangeField()
     verification = models.BooleanField()
