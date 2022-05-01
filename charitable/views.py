@@ -34,9 +34,9 @@ def login_view(request):
             if user is not None and user.is_admin:
                 login(request, user)
                 return redirect('adminpage')
-            elif user is not None and user.is_NGO:
+            elif user is not None and user.is_Ngo:
                 login(request, user)
-                return redirect('NGO')
+                return redirect('Ngo')
             elif user is not None and user.is_Donor:
                 login(request, user)
                 return redirect('donor')
@@ -51,9 +51,9 @@ def admin(request):
     return render(request,'admin.html')
 
 
-def customer(request):
+def Ngo(request):
     return render(request,'ngo.html')
 
 
-def employee(request):
+def Donor(request):
     return render(request,'Donor.html')
