@@ -10,7 +10,7 @@ from django.http import Http404
 from django.contrib import messages
 
 
-send_mail('Welcome mail', 'Welcome to charitable , where you get to support and get support.', 'from@example.com', ['to@example.com'], fail_silently=False)
+send_mail('Welcome mail', 'Welcome to charitable , where you get to support and get support.', 'victoria.awuor@student.moringaschool.com', ['to@example.com'], fail_silently=False)
 
 #api views
 class NGOList(APIView):

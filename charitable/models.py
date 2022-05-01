@@ -8,7 +8,7 @@ from django.contrib.postgres.fields import RangeField
 class Requests(models.Model):
     fin_statements = models.FileField(upload_to='documents')
     reports = models.FileField(upload_to='documents')
-    amount_range = RangeField()
+    amount_range = models.IntegerField(default=0,blank=True, null=True)
     verification = models.BooleanField()
     
 class NGO(models.Model):
