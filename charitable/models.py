@@ -19,7 +19,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
-class admin(models.Model):
+class Admin(models.Model):
     user = models.OneToOneField(User, related_name="admin", on_delete=models.CASCADE)
     email = models.EmailField(max_length=254, null=True, blank=True)
     password = models.CharField(max_length=243, null=True, blank= True)
