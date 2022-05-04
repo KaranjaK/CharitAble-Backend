@@ -13,7 +13,7 @@ class IsAdminUser(BasePermission):
 
 
 
-        return bool(request.user and request.user.is_Admin)
+        return bool(request.user and request.user.is_admin)
     
 
 class IsDonorUser(BasePermission):
