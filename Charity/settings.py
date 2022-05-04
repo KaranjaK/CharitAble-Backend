@@ -48,11 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
+
     'rest_framework',
     'rest_framework.authtoken',
     'charitable.apps.CharitableConfig',
-=======
     'charitable',
 
     'rest_framework',
@@ -60,7 +59,7 @@ INSTALLED_APPS = [
     "corsheaders",
 
 
->>>>>>> ba3d0f251e4b887cc9b3a52037b3af9ec42094c4
+
 ]
 
 REST_FRAMEWORK = {
