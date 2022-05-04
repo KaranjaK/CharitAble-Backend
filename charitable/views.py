@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render
 from django.core.mail import send_mail
 from rest_framework.response import Response
@@ -180,5 +181,64 @@ class AdminDescription(APIView):
         admin = self.get_admin(pk)
         admin.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+=======
+from django.shortcuts import render, redirect
+from .forms import SignUpForm, LoginForm
+from django.contrib.auth import authenticate, login
+
+
+>>>>>>> ba3d0f251e4b887cc9b3a52037b3af9ec42094c4
 
 # Create your views here.
+
+def index(request):
+    return render (request, 'index.html')
+
+def register(request):
+    msg = None
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            msg = 'succesfully created user'
+            return redirect('login_view')
+        else:
+            msg= 'form is not valid'
+    else:
+        form=SignUpForm()
+    return render(request, 'register.html', {'form': form, 'msg': msg})
+
+def login_view(request):
+    form = LoginForm(request.POST or None)
+    msg = None
+    if request.method == 'POST':
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None and user.is_admin:
+                login(request, user)
+                return redirect('adminpage')
+            elif user is not None and user.is_Ngo:
+                login(request, user)
+                return redirect('Ngo')
+            elif user is not None and user.is_Donor:
+                login(request, user)
+                return redirect('donor')
+            else:
+                msg= 'invalid credentials'
+        else:
+            msg = 'error validating form'
+    return render(request, 'login.html', {'form': form, 'msg': msg})
+
+
+def admin(request):
+    return render(request,'admin.html')
+
+
+def Ngo(request):
+    return render(request,'ngo.html')
+
+
+def Donor(request):
+    return render(request,'Donor.html')

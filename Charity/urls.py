@@ -15,9 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< HEAD
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('charitable.urls')),
 ]
+=======
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('charitable.api.urls')),
+    path('', include('charitable.urls')),
+]
+>>>>>>> ba3d0f251e4b887cc9b3a52037b3af9ec42094c4
