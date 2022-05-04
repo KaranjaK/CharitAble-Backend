@@ -5,7 +5,7 @@ class IsNgoUser(BasePermission):
 
 
 
-        return bool(request.use and request.user.is_Ngo)
+        return bool(request.user and request.user.is_Ngo)
     
 
 class IsAdminUser(BasePermission):
@@ -13,7 +13,7 @@ class IsAdminUser(BasePermission):
 
 
 
-        return bool(request.use and request.user.is_Admin)
+        return bool(request.user and request.user.is_Admin)
     
 
 class IsDonorUser(BasePermission):
@@ -21,4 +21,4 @@ class IsDonorUser(BasePermission):
 
 
 
-        return bool(request.use and request.user.is_Donor)
+        return bool(request.user and request.user.is_Donor)
