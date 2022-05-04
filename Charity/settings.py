@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'charitable',
+
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
+
+
 ]
 
 REST_FRAMEWORK = {
@@ -128,8 +131,10 @@ WSGI_APPLICATION = 'Charity.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'multi_user_auth',
+        'USER': 'moringa',
+    'PASSWORD':'Access',
     }
 }
 
@@ -177,4 +182,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+AUTH_USER_MODEL= 'charitable.User'
+
