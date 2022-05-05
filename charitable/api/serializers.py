@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from charitable.models import User, Ngo, Admin, Donor
+from charitable.models import User, NonGo, Administrator, Don
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         model=User
         fields=['username', 'email', 'is_admin']
 
-class AdminSignupSerializer(serializers.ModelSerializer):
+class AdministratorSignupSerializer(serializers.ModelSerializer):
     password2=serializers.CharField(style={"input_type":"password"}, write_only=True)
     class Meta:
         model=User
@@ -27,14 +27,14 @@ class AdminSignupSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"error": "Your passwords do not match!"})
             
         user.set_password(password)
-        user.is_admin=True
+        user.is_administrator=True
         user.save()
-        Admin.objects.create(user=user)
+        Administrator.objects.create(user=user)
         return user
 
 
 
-class NgoSignupSerializer(serializers.ModelSerializer):
+class NonGoSignupSerializer(serializers.ModelSerializer):
     password2=serializers.CharField(style={"input_type":"password"}, write_only=True)
     class Meta:
         model=User
@@ -54,12 +54,12 @@ class NgoSignupSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"error": "Your passwords do not match!"})
             
         user.set_password(password)
-        user.is_Ngo=True
+        user.is_NonGo=True
         user.save()
-        Ngo.objects.create(user=user)
+        NonGo.objects.create(user=user)
         return user
 
-class DonorSignupSerializer(serializers.ModelSerializer):
+class DonSignupSerializer(serializers.ModelSerializer):
     password2=serializers.CharField(style={"input_type":"password"}, write_only=True)
     class Meta:
         model=User
@@ -79,7 +79,7 @@ class DonorSignupSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"error": "Your passwords do not match!"})
             
         user.set_password(password)
-        user.is_Donor=True
+        user.is_Don=True
         user.save()
-        Donor.objects.create(user=user)
+        Don.objects.create(user=user)
         return user

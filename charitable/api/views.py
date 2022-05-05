@@ -1,14 +1,19 @@
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from .serializers import AdminSignupSerializer, DonorSignupSerializer, NgoSignupSerializer, UserSerializer
-from .permissions import IsAdminUser, IsNgoUser, IsDonorUser
+from .serializers import AdministratorSignupSerializer, DonSignupSerializer, NonGoSignupSerializer, UserSerializer
+from .permissions import IsAdministratorUser, IsNonGoUser, IsDonUser
 
 
-class AdminSignupView(generics.GenericAPIView):
-    serializer_class= AdminSignupSerializer
+class AdministratorSignupView(generics.GenericAPIView):
+    serializer_class= AdministratorSignupSerializer
     def post (self, request, *args, **kwargs):
         serializer=self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -19,8 +24,8 @@ class AdminSignupView(generics.GenericAPIView):
             "message": "You have succesfully creates your account!"
         })
 
-class NgoSignupView(generics.GenericAPIView):
-    serializer_class= NgoSignupSerializer
+class NonGoSignupView(generics.GenericAPIView):
+    serializer_class= NonGoSignupSerializer
     def post (self, request, *args, **kwargs):
         serializer=self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -32,8 +37,8 @@ class NgoSignupView(generics.GenericAPIView):
         })
 
 
-class DonorSignupView(generics.GenericAPIView):
-    serializer_class= DonorSignupSerializer
+class DonSignupView(generics.GenericAPIView):
+    serializer_class= DonSignupSerializer
     def post (self, request, *args, **kwargs):
         serializer=self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -61,23 +66,56 @@ class LogoutView(APIView):
         request.auth.delete()
         return Response(status=status.HTTP_200_OK)
 
-class AdminOnlyView(generics.RetrieveAPIView):
-    permission_classes=[permissions.IsAuthenticated&IsAdminUser]
+class AdministratorOnlyView(generics.RetrieveAPIView):
+    permission_classes=[permissions.IsAuthenticated&IsAdministratorUser]
     serializer_class=UserSerializer
 
     def get_object(self):
         return self.request.user
 
-class NgoOnlyView(generics.RetrieveAPIView):
-    permission_classes=[permissions.IsAuthenticated&IsNgoUser]
+class NonGoOnlyView(generics.RetrieveAPIView):
+    permission_classes=[permissions.IsAuthenticated&IsNonGoUser]
     serializer_class=UserSerializer
 
     def get_object(self):
         return self.request.user
     
-class DonorOnlyView(generics.RetrieveAPIView):
-    permission_classes=[permissions.IsAuthenticated&IsDonorUser]
+class DonOnlyView(generics.RetrieveAPIView):
+    permission_classes=[permissions.IsAuthenticated&IsDonUser]
     serializer_class=UserSerializer
 
     def get_object(self):
         return self.request.user
+
+
+
+
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        
+        token['username'] = user.username
+        
+
+        return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+
+
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        '/api/token',
+        '/api/token/refresh'
+
+    ]
+
+    return Response(routes)
+

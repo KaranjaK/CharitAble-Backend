@@ -1,24 +1,24 @@
 from rest_framework.permissions import BasePermission
 
-class IsNgoUser(BasePermission):
+class IsNonGoUser(BasePermission):
     def has_permission(self, request, view):
 
 
 
-        return bool(request.user and request.user.is_Ngo)
+        return bool(request.user and request.user.is_NonGo)
     
 
-class IsAdminUser(BasePermission):
+class IsAdministratorUser(BasePermission):
     def has_permission(self, request, view):
 
 
 
-        return bool(request.user and request.user.is_admin)
+        return bool(request.user and request.user.is_administrator)
     
 
-class IsDonorUser(BasePermission):
+class IsDonUser(BasePermission):
     def has_permission(self, request, view):
 
 
 
-        return bool(request.user and request.user.is_Donor)
+        return bool(request.user and request.user.is_Don)
