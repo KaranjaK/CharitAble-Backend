@@ -29,14 +29,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# sendgrid smtp
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+# SMTP
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kelviapps@gmail.com'#sender's email-id
+EMAIL_HOST_PASSWORD = '' #password associated with above email-id
+
 
 
 # Application definition
@@ -48,13 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'rest_framework',
     'rest_framework.authtoken',
     'charitable.apps.CharitableConfig',
-    'charitable',
-
-    'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
 

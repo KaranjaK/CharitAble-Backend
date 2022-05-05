@@ -43,10 +43,10 @@
 #     requests = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='requests')
 
 from django.db import models
-<<<<<<< HEAD
 from  cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import RangeField
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -62,11 +62,11 @@ class NGO(models.Model):
     category = models.TextField()
     description = models.TextField(max_length=200)
     web_link = models.URLField(max_length=300)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ngo_user')
     contact = models.IntegerField(default=0,blank=True, null=True)
     email = models.EmailField(max_length=100, null=True)
     location = models.CharField(max_length=100)
-    request = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='request')
+    request = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='ngo_request')
 
 
 class Donor(models.Model):
@@ -76,9 +76,9 @@ class Donor(models.Model):
     web_link = models.URLField(max_length=300)
     contact = models.IntegerField(default=0,blank=True, null=True)
     email = models.EmailField(max_length=100, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='donor_user')
     location = models.CharField(max_length=100)
-    request = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='request')
+    request = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='donor_request')
 
 
 
@@ -86,14 +86,13 @@ class Donor(models.Model):
 class Admin(models.Model):
     username = models.TextField()
     requests = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='requests')
-=======
-from django.contrib.auth.models import AbstractUser
 
-#creating models
+
+
+
 
 class User(AbstractUser):
     is_admin=models.BooleanField('Is admin', default=False)
     is_Ngo= models.BooleanField('Is Ngo', default=False)
     is_Donor=models.BooleanField('Is Donor', default=False)
 
->>>>>>> ba3d0f251e4b887cc9b3a52037b3af9ec42094c4

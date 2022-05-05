@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from django.shortcuts import render
 from django.core.mail import send_mail
 from rest_framework.response import Response
@@ -9,9 +9,16 @@ from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.http import Http404
 from django.contrib import messages
+from django.conf import settings
 
 
-send_mail('Welcome mail', 'Welcome to charitable , where you get to support and get support.', 'victoria.awuor@student.moringaschool.com', ['to@example.com'], fail_silently=False)
+
+subject = 'welcome to CharitAble'
+message = f' Thank you for chhoosing CharitAble, where kindness is the language!'
+email_from = settings.EMAIL_HOST_USER
+recipient_list = []
+send_mail( subject, message, email_from, recipient_list )
+
 
 #api views
 class NGOList(APIView):
@@ -181,13 +188,12 @@ class AdminDescription(APIView):
         admin = self.get_admin(pk)
         admin.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-=======
+
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 
 
->>>>>>> ba3d0f251e4b887cc9b3a52037b3af9ec42094c4
 
 # Create your views here.
 
