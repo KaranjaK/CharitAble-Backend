@@ -29,12 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# sendgrid smtp
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+
+
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -52,9 +49,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'charitable.apps.CharitableConfig',
-    'charitable',
+  
 
-    'rest_framework',
+ 
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
 
@@ -148,8 +145,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'multi_user_auth',
-        'USER': 'moringa',
-    'PASSWORD':'Access',
+        'USER': 'vicky',
+    'PASSWORD':'aderazi',
     }
 }
 
