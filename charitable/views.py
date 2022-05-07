@@ -24,9 +24,9 @@ def signup(request):
                 email =email)
 
          subject = 'welcome to CharitAble'
-         message = f'Hello dear, thank you for registering in CharitAble, where kindness is the language!'
+         message = f'Hello {user.username}, thank you for registering in CharitAble, where kindness is the language!'
          email_from = settings.EMAIL_HOST_USER
-         recipient_list = []
+         recipient_list = [user.email,]
          send_mail( subject, message, email_from, recipient_list )
          return redirect ("/homepage/")
 
