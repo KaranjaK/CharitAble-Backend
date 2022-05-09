@@ -15,7 +15,6 @@ class IsAdministratorUser(BasePermission):
 
         return bool(request.user and request.user.is_administrator)
     
-
 class IsDonUser(BasePermission):
     def has_permission(self, request, view):
 
