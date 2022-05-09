@@ -6,7 +6,7 @@ from charitable.models import User, NonGo, Administrator, Don
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields=['username', 'email', 'is_admin']
+        fields=['username', 'email', 'is_administrator']
 
 class AdministratorSignupSerializer(serializers.ModelSerializer):
     password2=serializers.CharField(style={"input_type":"password"}, write_only=True)

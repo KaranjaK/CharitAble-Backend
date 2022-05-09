@@ -144,7 +144,7 @@ WSGI_APPLICATION = 'Charity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'multi_user_auth',
+        'NAME': 'auth',
         'USER': 'moringa',
     'PASSWORD':'Access',
     }
@@ -189,6 +189,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -198,4 +204,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_USER_MODEL= 'charitable.User'
+ACCOUNT_UNIQUE_EMAIL=True
 

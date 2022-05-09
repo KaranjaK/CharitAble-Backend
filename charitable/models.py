@@ -3,6 +3,7 @@ from django.db import models
 from  cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import RangeField
+
 from django.contrib.auth.models import AbstractUser
 from rest_framework.authtoken.models import Token
 from django.db.models.signals import post_save
@@ -46,7 +47,7 @@ class Admin(models.Model):
     username = models.TextField()
     requests = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='requests')
 
-from django.contrib.auth.models import AbstractUser
+
 
 #creating models
 

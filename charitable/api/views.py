@@ -23,7 +23,7 @@ class AdministratorSignupView(generics.GenericAPIView):
         return Response({
             "user":UserSerializer(user, context=self.get_serializer_context()).data,
             "token":Token.objects.get(user=user).key,
-            "message": "You have succesfully creates your account!"
+            "message": "You have succesfully created your account!"
         })
 
 class NonGoSignupView(generics.GenericAPIView):
@@ -35,7 +35,7 @@ class NonGoSignupView(generics.GenericAPIView):
         return Response({
             "user":UserSerializer(user, context=self.get_serializer_context()).data,
             "token":Token.objects.get(user=user).key,
-            "message": "You have succesfully creates your account!"
+            "message": "You have succesfully created your account!"
         })
 
 
@@ -48,7 +48,7 @@ class DonSignupView(generics.GenericAPIView):
         return Response({
             "user":UserSerializer(user, context=self.get_serializer_context()).data,
             "token":Token.objects.get(user=user).key,
-            "message": "You have succesfully creates your account!"
+            "message": "You have succesfully created your account!"
         })
 
 class CustomeAuthToken(ObtainAuthToken):
