@@ -60,7 +60,7 @@ class CustomeAuthToken(ObtainAuthToken):
         return Response({
             'token':token.key,
             'user_id': user.pk,
-            'is_Ngo':user.is_Ngo
+            'is_Ngo':user.is_NonGo
         })
 
 class LogoutView(APIView):
