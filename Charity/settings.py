@@ -138,7 +138,7 @@ WSGI_APPLICATION = 'Charity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'auth',
+        'NAME': 'authentication',
         'USER': 'moringa',
     'PASSWORD':'Access',
     }
