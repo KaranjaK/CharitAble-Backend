@@ -145,8 +145,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'multi_user_auth',
-        'USER': 'vicky',
-    'PASSWORD':'aderazi',
+        'USER': 'moringa',
+    'PASSWORD':'Access',
     }
 }
 
