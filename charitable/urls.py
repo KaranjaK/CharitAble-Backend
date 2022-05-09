@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns= [
     path('api/ngo/', views.NGOList.as_view()),
     path('api/donor/', views.DonorList.as_view()),

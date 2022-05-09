@@ -12,4 +12,3 @@ admin.site.register(NGO)
 admin.site.register(Donor)
 admin.site.register(Requests)
 admin.site.register(Admin)
-

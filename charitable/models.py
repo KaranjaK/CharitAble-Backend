@@ -1,8 +1,12 @@
-
 from django.db import models
 from  cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import RangeField
+from django.contrib.auth.models import AbstractUser
+from rest_framework.authtoken.models import Token
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
 
 from django.contrib.auth.models import AbstractUser
 from rest_framework.authtoken.models import Token
@@ -39,8 +43,6 @@ class Donor(models.Model):
     email = models.EmailField(max_length=100, null=True)
     location = models.CharField(max_length=100)
     request = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='donor_request')
-
-
 
 
 class Admin(models.Model):
