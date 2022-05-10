@@ -7,14 +7,9 @@ from rest_framework.authtoken.models import Token
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
-
-from django.contrib.auth.models import AbstractUser
-from rest_framework.authtoken.models import Token
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.conf import settings
-
 # Create your models here.
+
+
 
 class Requests(models.Model):
     fin_statements = models.FileField(upload_to='documents')
@@ -52,6 +47,7 @@ class Admin(models.Model):
 
 
 #creating models
+
 
 class User(AbstractUser):
     is_administrator=models.BooleanField('Is admin', default=False)

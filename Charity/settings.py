@@ -10,12 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+
 from pathlib import Path
+from decouple import config
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+from decouple import config,Csv
 import os
 from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+cloudinary.config( 
+    cloud_name =config('CLOUD_NAME'),
+    api_key=config('CLOUD_API_KEY'), 
+    api_secret=config('API_SECRET'),
+)
 
 from datetime import timedelta
 
@@ -31,10 +43,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# SMTP
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kelviapps@gmail.com'#sender's email-id
+EMAIL_HOST_PASSWORD = '' #password associated with above email-id
+
 
 
 # Application definition
@@ -46,7 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'rest_framework',
     'rest_framework.authtoken',
     'charitable.apps.CharitableConfig',
@@ -146,8 +164,17 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
         'PORT': '',
-       }
-}
+    }
+    }
+
+ #smtp
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kelviapps@gmail.com'
+EMAIL_HOST_PASSWORD = '@wewe1234'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
