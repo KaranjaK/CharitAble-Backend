@@ -12,5 +12,4 @@ urlpatterns= [
     path('api/merch/requests-id/(?P<pk>[0-9]+)/',views.RequestsDescription.as_view()),
     path('api/merch/admin-id/(?P<pk>[0-9]+)/',views.AdminDescription.as_view()),
 
-
 ]
