@@ -39,7 +39,7 @@ send_mail( subject, message, email_from, recipient_list )
 
 
 #api views
-class NGOList(APIView):
+class NonGoList(APIView):
     def get(self, request, format=None):
         all_ngos = NonGo.objects.all()
         serializers = NonGoSerializer(all_ngos, many=True)
@@ -55,7 +55,7 @@ class NGOList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     permission_classes = (IsAdminOrReadOnly,)
 
-class NGODescription(APIView):
+class NonGoDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_ngo(self, pk):
         try:
@@ -82,7 +82,7 @@ class NGODescription(APIView):
         ngo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class DonorList(APIView):
+class DonList(APIView):
     def get(self, request, format=None):
         all_donors = Don.objects.all()
         serializers = DonSerializer(all_donors, many=True)
@@ -96,7 +96,7 @@ class DonorList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     permission_classes = (IsAdminOrReadOnly,)
 
-class DonorDescription(APIView):
+class DonDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_donor(self, pk):
         try:
@@ -166,7 +166,7 @@ class RequestsDescription(APIView):
         request.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class AdminList(APIView):
+class AdministratorList(APIView):
     def get(self, request, format=None):
         all_admins = Administrator.objects.all()
         serializers = AdministratorSerializer(all_admins, many=True)
@@ -180,7 +180,7 @@ class AdminList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     permission_classes = (IsAdminOrReadOnly,)
 
-class AdminDescription(APIView):
+class AdministratorDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_admin(self, pk):
         try:
