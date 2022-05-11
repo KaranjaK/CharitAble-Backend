@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import NGOSerializer, DonorSerializer, RequestsSerializer, AdminSerializer
-from charitable.models import NGO, Donor, Admin, Requests
+from .serializer import NonGoSerializer, DonSerializer, RequestsSerializer, AdministratorSerializer
+from charitable.models import Administrator, NonGo, Don, Administrator, NonGo, Requests
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.http import Http404
@@ -41,13 +41,13 @@ send_mail( subject, message, email_from, recipient_list )
 #api views
 class NGOList(APIView):
     def get(self, request, format=None):
-        all_ngos = NGO.objects.all()
-        serializers = NGOSerializer(all_ngos, many=True)
+        all_ngos = NonGo.objects.all()
+        serializers = NonGoSerializer(all_ngos, many=True)
         return Response(serializers.data)
         
 
     def post(self, request, format=None):
-        serializers = NGOSerializer(data=request.data)
+        serializers = NonGoSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -59,18 +59,18 @@ class NGODescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_ngo(self, pk):
         try:
-            return NGO.objects.get(pk=pk)
-        except NGO.DoesNotExist:
+            return NonGo.objects.get(pk=pk)
+        except NonGo.DoesNotExist:
             return Http404
 
     def get(self, request, pk, format=None):
         ngo = self.get_ngo(pk)
-        serializers = NGOSerializer(ngo)
+        serializers = NonGoSerializer(ngo)
         return Response(serializers.data)
 
     def put(self, request, pk, format=None):
         ngo = self.get_ngo(pk)
-        serializers = NGOSerializer(ngo, request.data)
+        serializers = NonGoSerializer(ngo, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
@@ -84,12 +84,12 @@ class NGODescription(APIView):
 
 class DonorList(APIView):
     def get(self, request, format=None):
-        all_donors = Donor.objects.all()
-        serializers = DonorSerializer(all_donors, many=True)
+        all_donors = Don.objects.all()
+        serializers = DonSerializer(all_donors, many=True)
         return Response(serializers.data)
 
     def post(self, request, format=None):
-        serializers = DonorSerializer(data=request.data)
+        serializers = DonSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -100,18 +100,18 @@ class DonorDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_donor(self, pk):
         try:
-            return Donor.objects.get(pk=pk)
-        except Donor.DoesNotExist:
+            return Don.objects.get(pk=pk)
+        except Don.DoesNotExist:
             return Http404
 
     def get(self, request, pk, format=None):
         donor = self.get_donor(pk)
-        serializers = DonorSerializer(donor)
+        serializers = DonSerializer(donor)
         return Response(serializers.data)
 
     def put(self, request, pk, format=None):
         donor = self.get_donor(pk)
-        serializers = DonorSerializer(donor, request.data)
+        serializers = DonSerializer(donor, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
@@ -168,12 +168,12 @@ class RequestsDescription(APIView):
 
 class AdminList(APIView):
     def get(self, request, format=None):
-        all_admins = Admin.objects.all()
-        serializers = AdminSerializer(all_admins, many=True)
+        all_admins = Administrator.objects.all()
+        serializers = AdministratorSerializer(all_admins, many=True)
         return Response(serializers.data)
 
     def post(self, request, format=None):
-        serializers = AdminSerializer(data=request.data)
+        serializers = AdministratorSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -184,18 +184,18 @@ class AdminDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_admin(self, pk):
         try:
-            return Admin.objects.get(pk=pk)
-        except Admin.DoesNotExist:
+            return Administrator.objects.get(pk=pk)
+        except Administrator.DoesNotExist:
             return Http404
 
     def get(self, request, pk, format=None):
         admin = self.get_admin(pk)
-        serializers = AdminSerializer(admin)
+        serializers = AdministratorSerializer(admin)
         return Response(serializers.data)
 
     def put(self, request, pk, format=None):
         admin = self.get_admin(pk)
-        serializers = AdminSerializer(admin, request.data)
+        serializers = AdministratorSerializer(admin, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)

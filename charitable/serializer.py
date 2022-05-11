@@ -1,23 +1,23 @@
 from rest_framework import serializers
-from .models import NGO, Donor, Requests, Admin
+from .models import NonGo, Don, Requests, Administrator
 
-class NGOSerializer(serializers.ModelSerializer):
+class NonGoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NGO
-        fields = ('id', 'name', 'logo','category', 'description', 'web_link', 'contact', 'email', 'location')
+        model = NonGo
+        fields = ('id', 'user', 'company_name','email', 'password')
 
-class DonorSerializer(serializers.ModelSerializer):
+class DonSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Donor
-        fields = ('id', 'name', 'type', 'web_link', 'contact', 'email', 'location')
+        model = Don
+        fields = ('id', 'user', 'Don_name',  'contact', 'email', 'password')
 
 class RequestsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requests
         fields = ('id', 'fin_statements', 'reports', 'amount_range', 'verification')
 
-class AdminSerializer(serializers.ModelSerializer):
+class AdministratorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Admin
-        fields = ('id', 'username')
+        model = Administrator
+        fields = ('id', 'user', 'email', 'password')
         
