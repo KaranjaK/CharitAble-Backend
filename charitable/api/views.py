@@ -111,7 +111,15 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def getRoutes(request):
     routes = [
         '/api/token',
-        '/api/token/refresh'
+        '/api/token/refresh',
+        'signup/admin/',
+        'signup/ngo/',
+        'signup/donor/',
+        'login/',
+        'logout/',
+        'Admin/dashboard/',
+        'Ngo/dashboard/',
+        'Donor/dashboard/'
 
     ]
 
