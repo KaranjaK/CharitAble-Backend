@@ -11,6 +11,10 @@ from .permissions import IsAdministratorUser, IsNonGoUser, IsDonUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.mail import send_mail
+from django.shortcuts import  redirect
 
 # creating my views
 
@@ -37,6 +41,24 @@ class NonGoSignupView(generics.GenericAPIView):
             "token":Token.objects.get(user=user).key,
             "message": "You have succesfully created your account!"
         })
+    
+    def signup(request):
+         if request.method == "POST":
+              company_name = request.POST["Don_name"]
+              password = request.POST["password"]
+              email = request.POST["email"]
+              user = User.objects.create_user(
+                     Don_name = company_name,
+                     password = password,
+                     email =email)
+        
+
+              subject = 'welcome to CharitAble'
+              message = f'Hello {user.company_name}, thank you for registering in CharitAble, where kindness is the language!'
+              email_from = settings.EMAIL_HOST_USER
+              recipient_list = [user.email,]
+              send_mail( subject, message, email_from, recipient_list )
+              return redirect ("/homepage/")
 
 
 class DonSignupView(generics.GenericAPIView):
@@ -50,6 +72,24 @@ class DonSignupView(generics.GenericAPIView):
             "token":Token.objects.get(user=user).key,
             "message": "You have succesfully created your account!"
         })
+    def signup(request):
+         if request.method == "POST":
+              Don_name = request.POST["Don_name"]
+              password = request.POST["password"]
+              email = request.POST["email"]
+              user = User.objects.create_user(
+                     Don_name = Don_name,
+                     password = password,
+                     email =email)
+        
+
+              subject = 'welcome to CharitAble'
+              message = f'Hello {user.Don_name}, thank you for registering in CharitAble, where kindness is the language!'
+              email_from = settings.EMAIL_HOST_USER
+              recipient_list = [user.email,]
+              send_mail( subject, message, email_from, recipient_list )
+              return redirect ("/homepage/")
+   
 
 class CustomeAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -96,7 +136,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         
-        token['username'] = user.username
+        token['Don_name'] = user.Don_name
         
 
         return token

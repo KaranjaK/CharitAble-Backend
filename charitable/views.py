@@ -12,30 +12,28 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
-def signup(request):
-    if request.method == "POST":
-         username = request.POST["username"]
-         password = request.POST["password"]
-         email = request.POST["email"]
-         user = User.objects.create_user(
-                username = username,
-                password = password,
-                email =email)
+# def signup(request):
+#     if request.method == "POST":
+#          username = request.POST["username"]
+#          password = request.POST["password"]
+#          email = request.POST["email"]
+#          user = User.objects.create_user(
+#                 username = username,
+#                 password = password,
+#                 email =email)
 
-         subject = 'welcome to CharitAble'
-         message = f'Hello {user.username}, thank you for registering in CharitAble, where kindness is the language!'
-         email_from = settings.EMAIL_HOST_USER
-         recipient_list = [user.email,]
-         send_mail( subject, message, email_from, recipient_list )
-         return redirect ("/homepage/")
+#          subject = 'welcome to CharitAble'
+#          message = f'Hello {user.username}, thank you for registering in CharitAble, where kindness is the language!'
+#          email_from = settings.EMAIL_HOST_USER
+#          recipient_list = [user.email,]
+#          send_mail( subject, message, email_from, recipient_list )
+#          return redirect ("/homepage/")
 
-
-
-subject = 'welcome to CharitAble'
-message = f' Thank you for chhoosing CharitAble, where kindness is the language!'
-email_from = settings.EMAIL_HOST_USER
-recipient_list = []
-send_mail( subject, message, email_from, recipient_list )
+# subject = 'welcome to CharitAble'
+# message = f' Thank you for chhoosing CharitAble, where kindness is the language!'
+# email_from = settings.EMAIL_HOST_USER
+# recipient_list = []
+# send_mail( subject, message, email_from, recipient_list )
 
 
 #api views
