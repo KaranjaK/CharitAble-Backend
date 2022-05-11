@@ -20,6 +20,7 @@ import cloudinary.api
 from decouple import config,Csv
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 cloudinary.config( 
@@ -68,10 +69,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'charitable.apps.CharitableConfig',
     'rest_framework_simplejwt.token_blacklist',
-    "corsheaders",
-
-
-
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -156,16 +154,19 @@ WSGI_APPLICATION = 'Charity.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+ 
+ 
 DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
- }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': '',
+    }
+    }
+
  #smtp
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -173,7 +174,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kelviapps@gmail.com'
 EMAIL_HOST_PASSWORD = '@wewe1234'
-
 
 
 # Password validation
@@ -214,13 +214,28 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ]
+}
+
+ACCOUNT_UNIQUE_EMAIL= True
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_USER_MODEL= 'charitable.User'
+ACCOUNT_UNIQUE_EMAIL=True
 

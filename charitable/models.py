@@ -1,5 +1,3 @@
-
-
 from django.db import models
 from  cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
@@ -9,7 +7,6 @@ from rest_framework.authtoken.models import Token
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
-
 # Create your models here.
 
 
@@ -43,15 +40,11 @@ class Donor(models.Model):
     request = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='donor_request')
 
 
-
-
 class Admin(models.Model):
     username = models.TextField()
     requests = models.ForeignKey(Requests, on_delete=models.CASCADE, related_name='requests')
 
 
-
-from django.contrib.auth.models import AbstractUser
 
 #creating models
 
@@ -61,6 +54,7 @@ class User(AbstractUser):
     is_NonGo= models.BooleanField('Is Ngo', default=False)
     is_Don=models.BooleanField('Is Donor', default=False)
 
+ 
     def __str__(self):
         return self.username
 
@@ -97,12 +91,5 @@ class Don(models.Model):
     
     def __str__(self):
         return self.Don_name
-
-
-
-
-
-
-
 
 

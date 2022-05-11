@@ -1,5 +1,4 @@
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -207,18 +206,5 @@ class AdminDescription(APIView):
         admin = self.get_admin(pk)
         admin.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-from django.shortcuts import render, redirect
-
-
-
-
-
-
-
-
-
-
-
 
 
