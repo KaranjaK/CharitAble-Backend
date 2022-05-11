@@ -44,6 +44,7 @@ class Administrator(models.Model):
 class NonGo(models.Model):
     user = models.OneToOneField(User, related_name="ngo", on_delete=models.CASCADE)
     company_name = models.CharField(max_length=50, null=True, blank=True)
+    logo = CloudinaryField('images', null=True)
     email = models.EmailField(max_length=254, null=True, blank=True)
     password = models.CharField(max_length=243, null=True, blank= True)
     
@@ -55,6 +56,7 @@ class Don(models.Model):
     user = models.OneToOneField(User, related_name="donor", on_delete=models.CASCADE)
     Don_name = models.CharField(max_length=254, null=True)
     contact = models.IntegerField(default=0,blank=True, null=True)
+    logo = CloudinaryField('images', null=True)
     email = models.EmailField(max_length=254)
     password = models.CharField(max_length=243, null=True, blank= True)
     
